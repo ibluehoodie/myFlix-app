@@ -23,6 +23,9 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
+//use express.static to route all requests for static files to corresponding files within selected folder (public);
+app.use(express.static('public'));
+
 let topMovies = [
   {
   title: 'Alien'
