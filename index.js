@@ -23,3 +23,24 @@ app.get('/movies', (req, res) => {
   res.json(topMovies);
 });
 
+let topMovies = [
+  {
+  title: 'Alien'
+  },
+  {
+  title: 'Dune'
+  },
+  {
+  title: 'Star Wars'
+  },
+  {
+  title: 'Starship Troopers'
+  },
+  {
+  title: 'The Thing'
+  },
+  {
+  title: 'Interstellar'
+  }
+];
+
