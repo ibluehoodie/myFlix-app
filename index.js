@@ -157,6 +157,19 @@ app.get('/movies', (req, res) => {
   res.status(200).json(movies);
 });
 
+//READ-GET requests: Return data about a single movie by title to the user
+app.get('/movies/:title', (req, res) => {
+  // const title = req.params.title
+  const {title} = req.params; //same as previous but with Object Destructuring syntax
+  const movie = movies.find(movie => movie.Title === title);
+
+  if (movie) {
+    res.status(200).json(movie);
+  } else {
+    res.status(400).send('movie not on record')
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
