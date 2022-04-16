@@ -27,26 +27,94 @@ let users = [
   }
 ];
 
-let topMovies = [
+//movie data borrowed from Bmcgaughan for testing purposes
+let movies = [
   {
-  title: 'Alien'
+    Title: 'The Shawshank Redemption',
+    Director: 'Frank Darabont',
+    Stars: ['Tim Robbins', 'Morgan Freeman', 'Bob Gunton'],
+    Genre: {
+      Name: 'Drama',
+      Description: 'a heartwarming escape story'
+    },
   },
   {
-  title: 'Dune'
+    Title: 'The Godfather',
+    Director: 'Frances Ford Coppola',
+    Stars: ['Marlon Brando', 'Al Pacino', 'James Caan'],
+    Genre: 'Crime',
   },
   {
-  title: 'Star Wars'
+    Title: 'The Dark Knight',
+    Director: 'Christopher Nolan',
+    Stars: ['Christian Bale', 'Heath Ledger', 'Aaron Eckhart'],
+    Genre: 'Action',
   },
   {
-  title: 'Starship Troopers'
+    Title: 'The Godfather: Part II',
+    Director: 'Francis Ford Coppola',
+    Stars: ['Al Pacino', 'Robert De Niro', 'Robert Duvall'],
+    Genre: 'Crime',
   },
   {
-  title: 'The Thing'
+    Title: '12 Angry Men',
+    Director: 'Sidney Lumet',
+    Stars: ['Henry Fonda', 'Lee J. Cobb', 'Martin Balsam'],
+    Genre: 'Drama',
   },
   {
-  title: 'Interstellar'
+    Title: "Schindler's List",
+    Director: 'Steven Spielberg',
+    Stars: ['Liam Neeson', 'Ralph Fiennes', 'Ben Kingsley'],
+    Genre: 'History',
+  },
+  {
+    Title: 'The Lord of the Rings: The Return of the King',
+    Director: 'Peter Jackson',
+    Stars: ['Elijah Wood', 'Viggo Mortensen', 'Ian McKellen'],
+    Genre: 'Fantasy',
+  },
+  {
+    Title: 'Pulp Fiction',
+    Director: 'Quentin Tarantino',
+    Stars: ['John Travolta', 'Uma Thurman', 'Samuel L. Jackson'],
+    Genre: 'Crime',
+  },
+  {
+    Title: 'The Lord of the Rings: The Fellowship of the Ring',
+    Director: 'Peter Jackson',
+    Stars: ['Elijah Wood', 'Orlando Bloom', 'Ian McKellen'],
+    Genre: 'Fantasy',
+  },
+  {
+    Title: 'The Good, the Bad and the Ugly',
+    Director: 'Sergio Leone',
+    Stars: ['Clint Eastwood', 'Eli Wallach', 'Lee Van Cleef'],
+    Genre: 'Western',
   }
 ];
+
+// let topMovies = [
+//   {
+//   title: 'Alien',
+//   },
+//   {
+//   title: 'Dune'
+//   },
+//   {
+//   title: 'Star Wars'
+//   },
+//   {
+//   title: 'Starship Troopers'
+//   },
+//   {
+//   title: 'The Thing'
+//   },
+//   {
+//   title: 'Interstellar'
+//   }
+// ];
+
 
 app.use((err, req, res, next) => {
   console.error(err.stack);
