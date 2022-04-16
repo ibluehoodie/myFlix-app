@@ -182,6 +182,17 @@ app.get('/movies/genre/:genreName', (req, res) => {
   }
 });
 
+//READ-GET requests: Return data about a director by name
+app.get('/movies/directors/:directorName', (req, res) => {
+  const {directorName} = req.params;
+  const director = movies.find(movie => movie.Director === directorName).Director;
+
+  if (director) {
+    res.status(200).json(director);
+  } else {
+    res.status(400).send('director not on record')
+  }
+});
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
