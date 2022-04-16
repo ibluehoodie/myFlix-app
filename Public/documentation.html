@@ -29,6 +29,93 @@
       <p> The web application will provide users with access to information about different movies, directors, and genres.</p>
       <p> Users will be able to sign up, update their personal information, and create a list of their favorite movies.</p>
     </div>
+
+    <table class="tg">
+      <thead>
+        <tr>
+          <th class="tg-lrtn"><span style="font-weight:bold;background-color:#C9DAF8">Business Logic</span></th>
+          <th class="tg-lrtn"><span style="font-weight:bold;background-color:#C9DAF8">URL</span></th>
+          <th class="tg-lrtn"><span style="font-weight:bold;background-color:#C9DAF8">HTTP Method</span></th>
+          <th class="tg-lrtn"><span style="font-weight:bold;background-color:#C9DAF8">Query Parameters</span></th>
+          <th class="tg-lrtn"><span style="font-weight:bold;background-color:#C9DAF8">Request body data by format</span></th>
+          <th class="tg-lrtn"><span style="font-weight:bold;background-color:#C9DAF8">Response body data by format</span></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Return a list of ALL movies to the user</span></td>
+          <td class="tg-za14">/movies</td>
+          <td class="tg-za14">GET</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A JSON object holding data about all the movies with format: {<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Title: string,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Director: string,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Stars: array,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;Genre: nested strings {<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Name: string,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description: string<br><br>&nbsp;&nbsp;&nbsp;&nbsp;},<br><br>&nbsp;&nbsp;}</td>
+        </tr>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Return data about a single movie by title to the user</span></td>
+          <td class="tg-za14">/movies/[Title]</td>
+          <td class="tg-za14">GET</td>
+          <td class="tg-za14">/movies/[Title]</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A JSON object holding data about a single movie, containing title, director, stars, genre (name and description). Ex: {<br>&nbsp;&nbsp;&nbsp;&nbsp;"Title": "The Shawshank Redemption",<br>&nbsp;&nbsp;&nbsp;&nbsp;"Director": "Frank Darabont",<br>&nbsp;&nbsp;&nbsp;&nbsp;"Stars": [<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Tim Robbins",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Morgan Freeman",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Bob Gunton"<br>&nbsp;&nbsp;&nbsp;&nbsp;],<br>&nbsp;&nbsp;&nbsp;&nbsp;"Genre": {<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Name": "Drama",<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Description": "a heartwarming escape story"<br>&nbsp;&nbsp;&nbsp;&nbsp;}<br>}</td>
+        </tr>
+        <tr>
+          <td class="tg-gd2f"><span style="background-color:#FFF">Return description data about a genre by (genre) name/title</span></td>
+          <td class="tg-za14">/movies/genre/[Genre]</td>
+          <td class="tg-za14">GET</td>
+          <td class="tg-za14">/movies/genre/[Genre]</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-gd2f"><span style="background-color:#FFF">Return data about a genre (description) by name/title (e.g., “Thriller”). Ex: {</span><br><span style="background-color:#FFF">&nbsp;&nbsp;&nbsp;&nbsp;"Name": "Drama",</span><br><span style="background-color:#FFF">&nbsp;&nbsp;&nbsp;&nbsp;"Description": "a heartwarming escape story"</span><br><span style="background-color:#FFF">}</span></td>
+        </tr>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Return data about a director by name</span></td>
+          <td class="tg-gd2f"><span style="font-weight:normal;background-color:#FFF">/movies/directors/[Director]</span></td>
+          <td class="tg-za14">GET</td>
+          <td class="tg-gd2f"><span style="font-weight:normal;background-color:#FFF">/movies/directors/[Director]</span></td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">Return data about a director (bio, birth year, death year) by name. Ex: "Peter Jackson"</td>
+        </tr>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Allow new users to register</span></td>
+          <td class="tg-za14">/users</td>
+          <td class="tg-za14">POST</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A JSON object holding data about the new user including name and favorite movies. Ex: {<br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "Leto II",<br>&nbsp;&nbsp;&nbsp;&nbsp;"favoriteMovies": []<br>}</td>
+          <td class="tg-za14">A JSON object holding data about the new user including assigned ID. Ex: {<br><br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "Leto II",<br><br>&nbsp;&nbsp;&nbsp;&nbsp;"favoriteMovies": [],<br><br>&nbsp;&nbsp;&nbsp;&nbsp;"id": "e2ea83f6-7681-4bd6-9018-8188d825fe7f"<br><br>}</td>
+        </tr>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Allow users to update their user username</span></td>
+          <td class="tg-za14">/users/[id]</td>
+          <td class="tg-za14">PUT</td>
+          <td class="tg-za14">/users/[id]</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A JSON object holding user data including updated username. Ex: {<br><br>&nbsp;&nbsp;&nbsp;&nbsp;"id": 1,<br><br>&nbsp;&nbsp;&nbsp;&nbsp;"name": "Leto II updated name",<br><br>&nbsp;&nbsp;&nbsp;&nbsp;"favoriteMovies": [<br><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"The Shawshank Redemption"<br><br>&nbsp;&nbsp;&nbsp;&nbsp;]<br><br>}</td>
+        </tr>
+        <tr>
+          <td class="tg-gd2f"><span style="background-color:#FFF">Allow users to add a movie to their list of favorites</span></td>
+          <td class="tg-za14">/users/[id]/[Title]</td>
+          <td class="tg-za14">POST</td>
+          <td class="tg-za14">/users/[id]/[Title]</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A text message indicating that the movie (selected by title) has been successfully added</td>
+        </tr>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Allow users to remove a movie from their list of favorites</span></td>
+          <td class="tg-za14">/users/[id]/[Title]</td>
+          <td class="tg-za14">DELETE</td>
+          <td class="tg-za14">/users/[id]/[Title]</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A text message indicating that the movie (selected by title) has been successfully removed</td>
+        </tr>
+        <tr>
+          <td class="tg-1lpk"><span style="color:#223C50;background-color:#FFF">Allow existing users to deregister</span></td>
+          <td class="tg-za14">/users/[id]</td>
+          <td class="tg-za14">DELETE</td>
+          <td class="tg-za14">/users/[id]</td>
+          <td class="tg-za14">None</td>
+          <td class="tg-za14">A text message indicating that the user (email) has been successfully removed</td>
+        </tr>
+      </tbody>
+    </table>
   </body>
 
   <div class='sources'>
