@@ -238,6 +238,9 @@ app.delete('/users/:id', (req, res) => {
   }
 });
 
+//use express.static to route all requests for static files to corresponding files within selected folder (Public);
+app.use(express.static('public'));
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
