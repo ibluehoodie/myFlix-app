@@ -223,6 +223,21 @@ app.delete('/users/:id/:movieTitle', (req, res) => {
   }
 });
 
+//DELETE request: Allow existing users to deregister
+app.delete('/users/:id', (req, res) => {
+  const {id} = req.params; /* Object Destructuring syntax */
+
+  let user = users.find( user => user.id == id);
+
+  if (user) {
+    users = users.filter(user => user.id != id); //preserves users EXCEPT the given id. != bc comparing string to a number.
+    // res.json(users); *test if filter works*
+    res.status(200).send(`User ${id} has been removed from user database`);
+  } else {
+    res.status(400).send('no user by this name found')
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
