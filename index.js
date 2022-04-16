@@ -152,6 +152,11 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', {root: __dirname });
 });
 
+//READ-GET requests: Return a list of ALL movies to the user
+app.get('/movies', (req, res) => {
+  res.status(200).json(movies);
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
