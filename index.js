@@ -193,6 +193,22 @@ app.get('/movies/directors/:directorName', (req, res) => {
     res.status(400).send('director not on record')
   }
 });
+
+//UPDATE-PUT request: Allow users to update their user username
+app.put('/users/:id', (req, res) => {
+  const {id} = req.params; /* Object Destructuring syntax */
+  const updatedUser = req.body;
+
+  let /* not const bc there can be multiple new users */ user = users.find( user => user.id == id); //search MDN "casting" for alternative
+
+  if (user) {
+    user.name = updatedUser.name;
+    res.status(200).json(user);
+  } else {
+    res.status(400).send('no user by this name found')
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
