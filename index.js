@@ -116,6 +116,18 @@ let movies = [
 // ];
 
 
+//CREATE-POST requests: Allow new users to register
+app.post('/users', (req, res) => {
+  const newUser = req.body /* made possible because of body-parser middleware reading data form body object */
+  if (newUser.name) {
+    newUser.id = uuid.v4(); /* use uuid to create unique id# for .id property attached to newUser object */
+    users.push(newUser);
+    res.status(201).json(newUser)
+  } else {
+    res.status(400).send('users neeed names');
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
