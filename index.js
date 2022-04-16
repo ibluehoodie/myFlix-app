@@ -128,6 +128,20 @@ app.post('/users', (req, res) => {
   }
 });
 
+//CREATE-POST request: Allow users to add a movie to their list of favorites
+app.post('/users/:id/:movieTitle', (req, res) => {
+  const {id, movieTitle} = req.params; /* Object Destructuring syntax */
+
+  let user = users.find( user => user.id == id); //search MDN "casting" for alternative
+
+  if (user) {
+    user.favoriteMovies.push(movieTitle);
+    res.status(200).send(`${movieTitle} has been added to user ${id}'s favorites.`);
+  } else {
+    res.status(400).send('no user by this name found')
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
