@@ -1,8 +1,9 @@
 const express = require('express'),
+  app = express(),
 //Use multiple modules in the same file with commas and implied variables
-morgan = require('morgan');
-
-const app = express();
+  morgan = require('morgan'),
+  bodyParser = require('body-parser'),
+  uuid = require('uuid');
 
 app.use(morgan('common'));
 
