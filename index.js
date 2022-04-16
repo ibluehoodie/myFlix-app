@@ -147,6 +147,11 @@ app.get('/', (req, res) => {
   res.send('Welcome to my movie club!!');
 });
 
+//structure = app.METHOD(PATH, HANDLER) PATH = endpoint URL, HANDLER = function to be executed when route is matched;
+app.get('/documentation', (req, res) => {
+  res.sendFile('public/documentation.html', {root: __dirname });
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
