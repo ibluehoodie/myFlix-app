@@ -170,6 +170,18 @@ app.get('/movies/:title', (req, res) => {
   }
 });
 
+//READ-GET requests: Return data about a genre by name/title
+app.get('/movies/genre/:genreName', (req, res) => {
+  const {genreName} = req.params;
+  const genre = movies.find(movie => movie.Genre.Name === genreName).Genre;
+
+  if (genre) {
+    res.status(200).json(genre);
+  } else {
+    res.status(400).send('genre not on record')
+  }
+});
+
 app.use((err, req, res, next) => {
   console.error(err.stack);
   res.status(500).send('Something is darned broke!');
