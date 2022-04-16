@@ -9,8 +9,23 @@ app.use(morgan('common'));
 
 app.use(bodyParser.json());
 
-//use express.static to route all requests for static files to corresponding files within selected folder (public);
-app.use(express.static('public'));
+let users = [
+  {
+    id: 1,
+    name: "Max",
+    favoriteMovies: ["The Shawshank Redemption"]
+  },
+  {
+    id: 2,
+    name: "Moritz",
+    favoriteMovies: ["The Godfather", "12 Angry Men"]
+  },
+  {
+    id: 3,
+    name: "Lola",
+    favoriteMovies: []
+  }
+];
 
 let topMovies = [
   {
