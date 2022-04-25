@@ -162,18 +162,21 @@ app.get('/movies/:Title', (req, res) => {
   });
 });
 
-//DELETE request: Allow users to remove a movie from their list of favorites
-app.delete('/users/:id/:movieTitle', (req, res) => {
-  const {id, movieTitle} = req.params; /* Object Destructuring syntax */
+// GET requests: Return descriptive data about a genre by genre name
+app.get('/movies/genre/:Name', (req, res) => {
+  Movies.findOne({ 'Genre.Name': req.params.Name})
+  .then((movie) => {
+    if(movie){
+      res.status(200).json(movie.Genre.Description);
+    } else {
+      res.status(400).send('Genre not on record');
+  };
+})
+  .catch((err) => {
+    res.status(500).send('Error: ' + err);
+  });
+});
 
-  let user = users.find( user => user.id == id);
-
-  if (user) {
-    user.favoriteMovies = user.favoriteMovies.filter(title => title !== movieTitle); //preserves favorite movies EXCEPT the given title
-    res.status(200).send(`${movieTitle} has been removed from user ${id}'s favorites.`);
-  } else {
-    res.status(400).send('no user by this name found')
-  }
 });
 
 //DELETE request: Allow existing users to deregister
