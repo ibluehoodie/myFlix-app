@@ -147,19 +147,19 @@ Movies.find()
   });
 });
 
-//UPDATE-PUT request: Allow users to update their user username
-app.put('/users/:id', (req, res) => {
-  const {id} = req.params; /* Object Destructuring syntax */
-  const updatedUser = req.body;
-
-  let /* not const bc there can be multiple new users */ user = users.find( user => user.id == id); //search MDN "casting" for alternative
-
-  if (user) {
-    user.name = updatedUser.name;
-    res.status(200).json(user);
-  } else {
-    res.status(400).send('no user by this name found')
-  }
+// GET a movie by title.
+app.get('/movies/:Title', (req, res) => {
+  Movies.findOne({ 'Title': req.params.Title })
+  .then((movie) => {
+    if(movie){
+      res.status(200).json(movie);
+    }else{
+      res.status(400).send('Movie not on record.');
+    };
+  })
+  .catch((err) => {
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 //DELETE request: Allow users to remove a movie from their list of favorites
