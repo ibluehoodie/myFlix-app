@@ -14,15 +14,45 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 const Movies = Models.Movie;
 const Users = Models.User;
 
+// NEW MONGOOSE CRUD OPERATIONS
+
+// CREATE in Mongoose
+// Post: add a user
+/* Expect JSON in this format:
+{
+  ID: Integer,
+  Username: String,
+  Password: String,
+  Email: String,
+  Birthday: Date
+}*/
 app.post('/users', (req, res) => {
-  const newUser = req.body /* made possible because of body-parser middleware reading data form body object */
-  if (newUser.name) {
-    newUser.id = uuid.v4(); /* use uuid to create unique id# for .id property attached to newUser object */
-    users.push(newUser);
-    res.status(201).json(newUser)
-  } else {
-    res.status(400).send('users neeed names');
-  }
+  // use findOne to check "Users" model for existing username.
+  Users.findOne({ 'Username': req.body.Username })
+  .then((user) => {
+    if (user) {
+      return res.status(400).send(req.body.Username + ' already exists');
+    } else {
+  // format for Mongoose to CREATE: populate a new user document with data sent in the HTTP request body.
+      Users.create({
+        Username: req.body.Username,
+        Password: req.body.Password,
+        Email: req.body.Email,
+        Birthday: req.body.Birthday,
+        FavoriteMovies: req.body.FavoriteMovies
+      })
+  // test functionality in Postman by sending POST request to "/users" endpoint.
+      .then((user) => {res.status(201).json(user) })
+      .catch((error) => {
+        console.error(error);
+        res.status(500).send('Error: ' + error);
+      })
+    }
+  })
+  .catch((error) => {
+    console.error(error);
+    res.status(500).send('Error: ' + error);
+  });
 });
 
 //CREATE-POST request: Allow users to add a movie to their list of favorites
