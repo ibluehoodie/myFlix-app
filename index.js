@@ -135,16 +135,16 @@ app.get('/users/:Username', (req, res) => {
   });
 });
 
-//READ-GET requests: Return data about a director by name
-app.get('/movies/directors/:directorName', (req, res) => {
-  const {directorName} = req.params;
-  const director = movies.find(movie => movie.Director === directorName).Director;
-
-  if (director) {
-    res.status(200).json(director);
-  } else {
-    res.status(400).send('director not on record')
-  }
+// GET a list of ALL movies.
+app.get('/movies', (req, res) => {
+Movies.find()
+  .then((movies) => {
+  res.status(200).json(movies);
+  })
+  .catch((err) => {
+  console.error(err);
+  res.status(500).send('Error: ' + error);
+  });
 });
 
 //UPDATE-PUT request: Allow users to update their user username
