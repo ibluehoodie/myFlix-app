@@ -84,9 +84,20 @@ app.put('/users/:Username', (req, res) => {
   });
 });
 
-//READ-GET requests
-app.get('/', (req, res) => {
-  res.send('Welcome to my movie club!!');
+// POST request: add a movie to a user's list of favorites
+app.post('/users/:Username/movies/:_id', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $push: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
+  },
+  { new: true }, // This line ensures that the updated document is returned.
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //structure = app.METHOD(PATH, HANDLER) PATH = endpoint URL, HANDLER = function to be executed when route is matched;
