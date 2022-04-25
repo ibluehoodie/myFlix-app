@@ -55,18 +55,33 @@ app.post('/users', (req, res) => {
   });
 });
 
-//CREATE-POST request: Allow users to add a movie to their list of favorites
-app.post('/users/:id/:movieTitle', (req, res) => {
-  const {id, movieTitle} = req.params; /* Object Destructuring syntax */
-
-  let user = users.find( user => user.id == id); //search MDN "casting" for alternative
-
-  if (user) {
-    user.favoriteMovies.push(movieTitle);
-    res.status(200).send(`${movieTitle} has been added to user ${id}'s favorites.`);
-  } else {
-    res.status(400).send('no user by this name found')
-  }
+//PUT request: Allow users to update their user details.
+// Update a user's info, by username
+/* We’ll expect JSON in this format
+{
+  Username: String, (required)
+  Password: String, (required)
+  Email: String, (required)
+  Birthday: Date
+}*/
+app.put('/users/:Username', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username},
+    { $set: {
+      Username: req.body.Username,
+      Password: req.body.Password,
+      Email: req.body.Email,
+      Birthday: req.body.Birthday
+    }
+  },
+  { new: true }, //This line ensures that the updated document is returned.
+  (err, updatedUser) => {
+    if(err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //READ-GET requests
