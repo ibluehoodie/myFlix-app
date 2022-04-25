@@ -110,18 +110,17 @@ app.get('/documentation', (req, res) => {
 app.get('/', (req, res) => {
   res.send('Welcome to my movie club!!');
 });
-
-//READ-GET requests: Return data about a single movie by title to the user
-app.get('/movies/:title', (req, res) => {
-  // const title = req.params.title
-  const {title} = req.params; //same as previous but with Object Destructuring syntax
-  const movie = movies.find(movie => movie.Title === title);
-
-  if (movie) {
-    res.status(200).json(movie);
-  } else {
-    res.status(400).send('movie not on record')
-  }
+// GET all users
+app.get('/users', (req, res) => {
+// query "Users" model for all documents within the collection instead of database: db.users.find().
+  Users.find()
+  .then((users) => {
+    res.status(201).json(users);
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 //READ-GET requests: Return data about a genre by name/title
