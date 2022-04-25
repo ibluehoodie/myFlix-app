@@ -6,6 +6,14 @@ app.use(morgan('common'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 const uuid = require('uuid');
+// requires Mongoose npm package, models.js file, and models defined in models.js file.
+const mongoose = require('mongoose');
+const Models = require('./models.js');
+mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+
+const Movies = Models.Movie;
+const Users = Models.User;
+
 app.post('/users', (req, res) => {
   const newUser = req.body /* made possible because of body-parser middleware reading data form body object */
   if (newUser.name) {
