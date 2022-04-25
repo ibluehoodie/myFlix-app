@@ -100,7 +100,8 @@ app.post('/users/:Username/movies/:_id', (req, res) => {
   });
 });
 
-//structure = app.METHOD(PATH, HANDLER) PATH = endpoint URL, HANDLER = function to be executed when route is matched;
+// READ in Mongoose
+// GET documentation page: structure = app.METHOD(PATH, HANDLER) PATH = endpoint URL, HANDLER = function to be executed when route is matched;
 app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', {root: __dirname });
 });
