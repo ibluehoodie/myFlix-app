@@ -192,6 +192,21 @@ app.get('/movies/director/:Name', (req, res) => {
   });
 });
 
+//DELETE in Mongoose
+//// DELETE request: remove a movie from a user's list of favorites.
+app.delete('/users/:Username/movies/:_id', (req, res) => {
+  Users.findOneAndUpdate({ Username: req.params.Username }, {
+    $pull: {FavoriteMovies: req.params._id }
+  },
+  { new: true }, // This line ensures that the updated document is returned.
+  (err, updatedUser) => {
+    if (err) {
+      console.error(err);
+      res.status(500).send('Error: ' + err);
+    } else {
+      res.json(updatedUser);
+    }
+  });
 });
 
 //DELETE request: Allow existing users to deregister
