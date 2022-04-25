@@ -177,6 +177,21 @@ app.get('/movies/genre/:Name', (req, res) => {
   });
 });
 
+//GET requests: Return data about a director by name
+app.get('/movies/director/:Name', (req, res) => {
+  Movies.findOne({ 'Director.Name': req.params.Name})
+  .then((movie) => {
+    if(movie){
+      res.status(200).json(movie.Director);
+    } else {
+      res.status(400).send('Director not on record');
+  };
+  })
+  .catch((err) => {
+    res.status(500).send('Error: ' + err);
+  });
+});
+
 });
 
 //DELETE request: Allow existing users to deregister
