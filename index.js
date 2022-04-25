@@ -210,18 +210,19 @@ app.delete('/users/:Username/movies/:_id', (req, res) => {
 });
 
 //DELETE request: Allow existing users to deregister
-app.delete('/users/:id', (req, res) => {
-  const {id} = req.params; /* Object Destructuring syntax */
-
-  let user = users.find( user => user.id == id);
-
-  if (user) {
-    users = users.filter(user => user.id != id); //preserves users EXCEPT the given id. != bc comparing string to a number.
-    // res.json(users); *test if filter works*
-    res.status(200).send(`User ${id} has been removed from user database`);
-  } else {
-    res.status(400).send('no user by this name found')
-  }
+app.delete('/users/:Username', (req, res) => {
+  Users.findOneAndRemove({ Username: req.params.Username })
+  .then((user) => {
+    if (!user) {
+      res.status(400).send(req.params.Username + ' was not found.');
+    } else {
+      res.status(200).send(req.params.Username + ' was deleted.');
+    }
+  })
+  .catch((err) => {
+    console.error(err);
+    res.status(500).send('Error: ' + err);
+  });
 });
 
 //use express.static to route all requests for static files to corresponding files within selected folder (Public);
