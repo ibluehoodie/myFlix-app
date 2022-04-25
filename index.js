@@ -106,9 +106,9 @@ app.get('/documentation', (req, res) => {
   res.sendFile('public/documentation.html', {root: __dirname });
 });
 
-//READ-GET requests: Return a list of ALL movies to the user
-app.get('/movies', (req, res) => {
-  res.status(200).json(movies);
+//GET requests test localhost:8080
+app.get('/', (req, res) => {
+  res.send('Welcome to my movie club!!');
 });
 
 //READ-GET requests: Return data about a single movie by title to the user
