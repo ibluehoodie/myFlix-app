@@ -1,14 +1,11 @@
 const express = require('express'),
-  app = express(),
-//Use multiple modules in the same file with commas and implied variables
-  morgan = require('morgan'),
-  bodyParser = require('body-parser'),
-  uuid = require('uuid');
-
+  app = express();
+// Use multiple modules in the same file with commas and implied variables.
+const morgan = require('morgan');
 app.use(morgan('common'));
-
+const bodyParser = require('body-parser');
 app.use(bodyParser.json());
-//CREATE-POST requests: Allow new users to register
+const uuid = require('uuid');
 app.post('/users', (req, res) => {
   const newUser = req.body /* made possible because of body-parser middleware reading data form body object */
   if (newUser.name) {
