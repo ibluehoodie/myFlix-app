@@ -2,7 +2,9 @@ const express = require('express'),
   app = express();
 // Use multiple modules in the same file with commas and implied variables.
 const morgan = require('morgan');
+// Morgan middleware library for logging requests.
 app.use(morgan('common'));
+
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
 // Integrate ./auth.js for authentication and authroization with HTTP and JWT.
@@ -19,6 +21,15 @@ mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, 
 
 const Movies = Models.Movie;
 const Users = Models.User;
+
+// middleware uses
+//use express.static to route all requests for static files to corresponding files within selected folder (Public);
+app.use(express.static('public'));
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something is darned broke!');
+});
 
 // NEW MONGOOSE CRUD OPERATIONS
 
