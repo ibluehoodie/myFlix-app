@@ -398,3 +398,13 @@ var user007 = {
     "_id": "62660e13ddd7238f2e5b0b00",
     "__v": 0
 }
+
+var user008 =  {
+    "Username": "Amigos",
+    "Password": "tres",
+    "Email": "mshort3@hollywood.com",
+    "Birthday": "1945-04-01T00:00:00.000Z",
+    "FavoriteMovies": [],
+    "_id": "6269fc2e87a6da1fcc3f28e5",
+    "__v": 0
+}
