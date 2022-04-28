@@ -5,7 +5,13 @@ const morgan = require('morgan');
 app.use(morgan('common'));
 const bodyParser = require('body-parser');
 app.use(bodyParser.json());
+// Integrate ./auth.js for authentication and authroization with HTTP and JWT.
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
 const uuid = require('uuid');
+
 // requires Mongoose npm package, models.js file, and models defined in models.js file.
 const mongoose = require('mongoose');
 const Models = require('./models.js');
