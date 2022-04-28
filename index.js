@@ -31,6 +31,12 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something is darned broke!');
 });
 
+// import auth.js file.
+let auth = require('./auth')(app); // passing (app) argument makes Express available in auth.js.
+// import passport.js and require passport module from npm.
+const passport = require('passport');
+require('./passport');
+
 // NEW MONGOOSE CRUD OPERATIONS
 
 // CREATE in Mongoose
