@@ -39,16 +39,7 @@ require('./passport');
 
 // NEW MONGOOSE CRUD OPERATIONS
 
-// CREATE in Mongoose
-// Post: add a user
-/* Expect JSON in this format:
-{
-  ID: Integer,
-  Username: String,
-  Password: String,
-  Email: String,
-  Birthday: Date
-}*/
+// CREATE in Mongoose: add a user
 app.post('/users', (req, res) => {
   // use findOne to check "Users" model for existing username.
   Users.findOne({ 'Username': req.body.Username })
@@ -87,7 +78,7 @@ app.post('/users', (req, res) => {
   Email: String, (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username},
     { $set: {
       Username: req.body.Username,
@@ -108,7 +99,7 @@ app.put('/users/:Username', (req, res) => {
 });
 
 // POST request: add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:_id', (req, res) => {
+app.post('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $push: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
   },
@@ -125,7 +116,7 @@ app.post('/users/:Username/movies/:_id', (req, res) => {
 
 // READ in Mongoose
 // GET documentation page: structure = app.METHOD(PATH, HANDLER) PATH = endpoint URL, HANDLER = function to be executed when route is matched;
-app.get('/documentation', (req, res) => {
+app.get('/documentation', passport.authenticate('jwt', {session: false}), (req, res) => {
   res.sendFile('public/documentation.html', {root: __dirname });
 });
 
@@ -134,7 +125,7 @@ app.get('/', (req, res) => {
   res.send('Welcome to my movie club!!');
 });
 // GET all users
-app.get('/users', (req, res) => {
+app.get('/users', passport.authenticate('jwt', {session: false}), (req, res) => {
 // query "Users" model for all documents within the collection instead of database: db.users.find().
   Users.find()
   .then((users) => {
@@ -147,7 +138,7 @@ app.get('/users', (req, res) => {
 });
 
 // GET a user by username.
-app.get('/users/:Username', (req, res) => {
+app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOne({ Username: req.params.Username })
   .then((user) => {
     res.json(user);
@@ -159,7 +150,7 @@ app.get('/users/:Username', (req, res) => {
 });
 
 // GET a list of ALL movies.
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
 Movies.find()
   .then((movies) => {
   res.status(200).json(movies);
@@ -171,7 +162,7 @@ Movies.find()
 });
 
 // GET a movie by title.
-app.get('/movies/:Title', (req, res) => {
+app.get('/movies/:Title', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({ 'Title': req.params.Title })
   .then((movie) => {
     if(movie){
@@ -186,7 +177,7 @@ app.get('/movies/:Title', (req, res) => {
 });
 
 // GET requests: Return descriptive data about a genre by genre name
-app.get('/movies/genre/:Name', (req, res) => {
+app.get('/movies/genre/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({ 'Genre.Name': req.params.Name})
   .then((movie) => {
     if(movie){
@@ -201,7 +192,7 @@ app.get('/movies/genre/:Name', (req, res) => {
 });
 
 //GET requests: Return data about a director by name
-app.get('/movies/director/:Name', (req, res) => {
+app.get('/movies/director/:Name', passport.authenticate('jwt', {session: false}), (req, res) => {
   Movies.findOne({ 'Director.Name': req.params.Name})
   .then((movie) => {
     if(movie){
@@ -217,7 +208,7 @@ app.get('/movies/director/:Name', (req, res) => {
 
 //DELETE in Mongoose
 //// DELETE request: remove a movie from a user's list of favorites.
-app.delete('/users/:Username/movies/:_id', (req, res) => {
+app.delete('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $pull: {FavoriteMovies: req.params._id }
   },
@@ -233,7 +224,7 @@ app.delete('/users/:Username/movies/:_id', (req, res) => {
 });
 
 //DELETE request: Allow existing users to deregister
-app.delete('/users/:Username', (req, res) => {
+app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
   Users.findOneAndRemove({ Username: req.params.Username })
   .then((user) => {
     if (!user) {
@@ -246,14 +237,6 @@ app.delete('/users/:Username', (req, res) => {
     console.error(err);
     res.status(500).send('Error: ' + err);
   });
-});
-
-//use express.static to route all requests for static files to corresponding files within selected folder (Public);
-app.use(express.static('public'));
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something is darned broke!');
 });
 
 //listen for requests
