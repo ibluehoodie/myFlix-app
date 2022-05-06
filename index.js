@@ -60,7 +60,28 @@ require('./passport');
 // NEW MONGOOSE CRUD OPERATIONS
 
 // CREATE in Mongoose: add a user
-app.post('/users', (req, res) => {
+app.post('/users',
+  // Validation logic here for request
+  //you can either use a chain of methods like .not().isEmpty()
+  //which means "opposite of isEmpty" in plain english "is not empty"
+  //or use .isLength({min: 5}) which means
+  //minimum value of 5 characters are only allowed.
+  [
+    check('Username', 'Username is required').isLength({min: 6}),
+      check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+      check('Password', 'Password is required').not().isEmpty(),
+      check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+
+  // check the validation object for errors.
+  let errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.status(422).json({ errors: errors.array() });
+  };
+
+  // insert hashing code based on hashPassword in models.js
+  let hashedPassword = Users.hashPassword(req.body.Password);
   // use findOne to check "Users" model for existing username.
   Users.findOne({ 'Username': req.body.Username })
   .then((user) => {
