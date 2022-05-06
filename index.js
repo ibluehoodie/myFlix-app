@@ -280,8 +280,14 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
   });
 });
 
-//listen for requests
-app.listen(8080, () => {
-  console.log('Your app is running on port 8080.');
+
+// listen for requests
+const port = process.env.PORT || 8080;
+app.listen(port, '0.0.0.0',() => {
+  console.log('Listening on Port ' + port);
 });
+// app.listen(8080, () => {
+//   console.log('Your app is running on port 8080.');
+// });
+
 // (maybe) in terminal "npm run dev".
