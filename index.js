@@ -14,6 +14,9 @@ app.use(bodyParser.urlencoded({
 
 const uuid = require('uuid');
 
+// import server-side input validation module.
+const {check, validationResult} = require('express-validator');
+
 // requires Mongoose npm package, models.js file, and models defined in models.js file.
 const mongoose = require('mongoose');
 const Models = require('./models.js');
