@@ -34,6 +34,23 @@ app.use((err, req, res, next) => {
   res.status(500).send('Something is darned broke!');
 });
 
+// keep above "auth" import.Initialize cors.
+const cors = require('cors');
+app.use(cors());
+// Define allowed domains for cors.
+let allowedOrigins = ['http://localhost:8080', 'http://testsite.com'];
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if(!origin) return callback(null, true);
+    if(allowedOrigins.indexOf(origin) === -1){ // If a specific origin isn't found on the list of allowed origins.
+    let message = 'The CORS policy for this application doesn\'t allow access from origin ' + origin;
+      return callback(new Error(message ), false);
+    }
+    return callback(null, true);
+  }
+}));
+
 // import auth.js file.
 let auth = require('./auth')(app); // passing (app) argument makes Express available in auth.js.
 // import passport.js and require passport module from npm.
