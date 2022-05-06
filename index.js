@@ -91,7 +91,8 @@ app.post('/users',
   // format for Mongoose to CREATE: populate a new user document with data sent in the HTTP request body.
       Users.create({
         Username: req.body.Username,
-        Password: req.body.Password,
+        // update with hashed Password.
+        Password: hashedPassword,
         Email: req.body.Email,
         Birthday: req.body.Birthday,
         FavoriteMovies: req.body.FavoriteMovies
@@ -119,7 +120,14 @@ app.post('/users',
   Email: String, (required)
   Birthday: Date
 }*/
-app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [
+  check('Username', 'Username is required').isLength({min: 7}),
+    check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
+    check('Password', 'Password is required').not().isEmpty(),
+    check('Email', 'Email does not appear to be valid').isEmail()
+], (req, res) => {
+  // insert hashing code based on hashPassword in models.js
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOneAndUpdate({ Username: req.params.Username},
     { $set: {
       Username: req.body.Username,
@@ -141,6 +149,7 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), (req
 
 // POST request: add a movie to a user's list of favorites
 app.post('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
+  let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOneAndUpdate({ Username: req.params.Username }, {
     $push: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
   },
