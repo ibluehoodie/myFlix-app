@@ -334,68 +334,69 @@ db.genres.insertOne(genre012)
 
 //USERS collection
 var user001 = {
-  Username:"Jacob Krummel",
-  Password:"slagsted",
-  Email:"jkrummel@usarmy.org",
-  Birthday: new Date("1928-04-20"),
-  FavoriteMovies:["movie003", "movie005", "movie011"]
+  "Username":"JacobKrummel",
+  "Password":"slagsted",
+  "Email":"jkrummel@usarmy.org",
+  "Birthday": "1928-04-20",
+  "FavoriteMovies":[]
 }
 db.users.insertOne(user001)
+token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc0NGQ2MzljYzBjN2RiYjM1ZDU2ZDkiLCJVc2VybmFtZSI6IkphY29iS3J1bW1lbCIsIlBhc3N3b3JkIjoiJDJiJDEwJFAyYzNGYjFyOTZkb2RTelEvZS9EYS45RHhCSlZkaUI0dlF3aFdVcExDMkplS0dVdDIyZEVHIiwiRW1haWwiOiJqa3J1bW1lbEB1c2FybXkub3JnIiwiQmlydGhkYXkiOiIxOTI4LTA0LTIwVDAwOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjUxNzkwMTM5LCJleHAiOjE2NTIzOTQ5MzksInN1YiI6IkphY29iS3J1bW1lbCJ9.AA0dU2gzbnESF_xmaS5LgyL5IDIhqoXKiM30uIQGNHQ"
 
 var user002 = {
-  Username:"Joe Morning",
+  Username:"JoeMorning",
   Password:"crossover",
   Email:"jmorning@usarmy.org",
-  Birthday: new Date("1935-12-25"),
-  FavoriteMovies:["movie007", "movie008", "movie010"]
+  Birthday: "1935-12-25",
+  FavoriteMovies:[]
 }
 db.users.insertOne(user002)
 
 var user003 = {
-  Username:"James Crumley",
+  Username:"JameCrumley",
   Password:"sugrue",
   Email:"jcrumley@usarmy.org",
-  Birthday: new Date("1907-05-05"),
-  FavoriteMovies:["movie002", "movie009", "movie010"]
+  Birthday: "1907-05-05",
+  FavoriteMovies:[]
 }
 db.users.insertOne(user003)
 
 var user004 = {
-  Username:"Vince Noir",
+  Username:"VinceNoir",
   Password:"crackfox",
   Email:"vnoir@mboosh.com",
-  Birthday: new Date("1969-11-05"),
-  FavoriteMovies:["movie006", "movie007", "movie008"]
+  Birthday: "1969-11-05",
+  FavoriteMovies:[]
 }
 db.users.insertOne(user004)
 
 var user005 = {
-  Username:"Howard Moon",
+  Username:"HowardMoon",
   Password:"binman",
   Email:"hmoon@mboosh.com",
-  Birthday: new Date("1954-4-15"),
-  FavoriteMovies:["movie001", "movie002", "movie004", "movie011"]
+  Birthday: "1954-4-15",
+  FavoriteMovies:[]
 }
 db.users.insertOne(user005)
 
 //entered via Postman request
 var user006 = {
-    "Username": "Bob Fossil",
+    "Username": "BobFossil",
     "Password": "zooniverse",
     "Email": "bfossil@mboosh.com",
-    "Birthday": "1950-12-07T00:00:00.000Z",
+    "Birthday": "1950-12-07",
     "FavoriteMovies": ["626596a4da4183683fe001d8"],
-    "_id": "6265bd56343228151d3c928b",
+    "_id": "",
     "__v": 0
 };
 
 var user007 = {
-    "Username": "Naboo the Enigma",
+    "Username": "NabooTheEnigma",
     "Password": "shamanlife",
     "Email": "ntenigma@mboosh.com",
-    "Birthday": "1969-06-04T00:00:00.000Z",
+    "Birthday": "1969-06-04",
     "FavoriteMovies": [],
-    "_id": "62660e13ddd7238f2e5b0b00",
+    "_id": "",
     "__v": 0
 }
 
@@ -403,8 +404,13 @@ var user008 =  {
     "Username": "Amigos",
     "Password": "tres",
     "Email": "mshort3@hollywood.com",
-    "Birthday": "1945-04-01T00:00:00.000Z",
+    "Birthday": "1945-04-01",
     "FavoriteMovies": [],
-    "_id": "6269fc2e87a6da1fcc3f28e5",
+    "_id": "",
     "__v": 0
 }
+
+/*
+JWT
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjY5ZmMyZTg3YTZkYTFmY2MzZjI4ZTUiLCJVc2VybmFtZSI6IkFtaWdvcyIsIlBhc3N3b3JkIjoidHJlcyIsIkVtYWlsIjoibXNob3J0M0Bob2xseXdvb2QuY29tIiwiQmlydGhkYXkiOiIxOTQ1LTA0LTAxVDAwOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjUxMTE0Njk3LCJleHAiOjE2NTE3MTk0OTcsInN1YiI6IkFtaWdvcyJ9.kJVt9zR9uani-5a1UuJ41YpVUeO_SAMDKADh0ejxoxg
+*/
