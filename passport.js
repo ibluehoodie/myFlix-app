@@ -25,6 +25,12 @@ passport.use(new LocalStrategy({
       return callback(null, false, {message: 'Incorrect username or password.'});
     }
 
+    // validate any password a user enters, per bcrypt module and validatePassword() in models.js
+    if (!user.validatePassword(password)) {
+      console.log('incorrect password');
+      return callback(null, false, {message: 'Incorrect password.'});
+    }
+
     console.log('complete');
     return callback(null, user);
   });
