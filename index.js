@@ -20,7 +20,11 @@ const {check, validationResult} = require('express-validator');
 // requires Mongoose npm package, models.js file, and models defined in models.js file.
 const mongoose = require('mongoose');
 const Models = require('./models.js');
-mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// local databse connection.
+// mongoose.connect('mongodb://localhost:27017/myFlixDB', { useNewUrlParser: true, useUnifiedTopology: true });
+// online database connection to MongoDB Atlas.
+mongoose.connect(process.env.CONNECTION_URI, { useNewUrlParser: true, useUnifiedTopology: true });
+
 
 const Movies = Models.Movie;
 const Users = Models.User;
