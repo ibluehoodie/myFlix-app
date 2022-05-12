@@ -335,20 +335,22 @@ db.genres.insertOne(genre012)
 //USERS collection
 var user001 = {
   "Username":"JacobKrummel",
-  "Password":"slagsted",
+  "Password": "$2b$10$P2c3Fb1r96dodSzQ/e/Da.9DxBJVdiB4vQwhWUpLC2JeKGUt22dEG",//"slagsted",
   "Email":"jkrummel@usarmy.org",
-  "Birthday": "1928-04-20",
+  "Birthday": "1928-05-20",
   "FavoriteMovies":[]
 }
 db.users.insertOne(user001)
 token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2Mjc0NGQ2MzljYzBjN2RiYjM1ZDU2ZDkiLCJVc2VybmFtZSI6IkphY29iS3J1bW1lbCIsIlBhc3N3b3JkIjoiJDJiJDEwJFAyYzNGYjFyOTZkb2RTelEvZS9EYS45RHhCSlZkaUI0dlF3aFdVcExDMkplS0dVdDIyZEVHIiwiRW1haWwiOiJqa3J1bW1lbEB1c2FybXkub3JnIiwiQmlydGhkYXkiOiIxOTI4LTA0LTIwVDAwOjAwOjAwLjAwMFoiLCJGYXZvcml0ZU1vdmllcyI6W10sIl9fdiI6MCwiaWF0IjoxNjUxNzkwMTM5LCJleHAiOjE2NTIzOTQ5MzksInN1YiI6IkphY29iS3J1bW1lbCJ9.AA0dU2gzbnESF_xmaS5LgyL5IDIhqoXKiM30uIQGNHQ"
 
 var user002 = {
-  Username:"JoeMorning",
-  Password:"crossover",
-  Email:"jmorning@usarmy.org",
-  Birthday: "1935-12-25",
-  FavoriteMovies:[]
+    "Username": "JoeMorning",
+    "Password": "$2b$10$qJ9ISL9DmjKC5MXCz5VcPeJtRTK6zJiq0iZJyNoni2FOZrTz4XFva",
+    "Email": "jmorning@usarmy.org",
+    "Birthday": "1935-12-25T00:00:00.000Z",
+    "FavoriteMovies": [],
+    "_id": "6279c562a68a33a2878fea9b",
+    "__v": 0
 }
 db.users.insertOne(user002)
 
