@@ -1,5 +1,0 @@
-Delete from movies
-where title = 'Domino';
-
-select *
-from movies

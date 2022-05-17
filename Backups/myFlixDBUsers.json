@@ -1,5 +1,0 @@
-{"_id":"user001","Username":"Jacob Krummel","Password":"slagsted","Email":"jkrummel@usarmy.org","Birthday":{"$date":"1928-04-20T00:00:00Z"},"FavoriteMovies":["movie003","movie005","movie011"]}
-{"_id":"user002","Username":"Joe Morning","Password":"crossover","Email":"jmorning@usarmy.org","Birthday":{"$date":"1935-12-25T00:00:00Z"},"FavoriteMovies":["movie007","movie008","movie010"]}
-{"_id":"user003","Username":"James Crumley","Password":"sugrue","Email":"jcrumley@usarmy.org","Birthday":{"$date":{"$numberLong":"-1977436800000"}},"FavoriteMovies":["movie002","movie009","movie010"]}
-{"_id":"user004","Username":"Vince Noir","Password":"crackfox","Email":"vnoir@mboosh.com","Birthday":{"$date":{"$numberLong":"-4924800000"}},"FavoriteMovies":["movie006","movie007","movie008"]}
-{"_id":"user005","Username":"Howard Moon","Password":"binman","Email":"hmoon@mboosh.com","Birthday":{"$date":{"$numberLong":"-495936000000"}},"FavoriteMovies":["movie001","movie002","movie004","movie011"]}
