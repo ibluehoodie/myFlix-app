@@ -5,7 +5,7 @@ movies, directors, and genres. Users will be able to sign up, update their
 personal information, and create a list of their favorite movies.
 
 ## Description:
-This project using HTML, CSS, and Javascript to develop a simple app that loads and presents data from an external API. The user is able to select specific data for detailed viewing.
+This project uses HTML and Javascript to develop a simple app that loads and presents data from an external API. The user is able to select specific data for detailed viewing.
 Additionally, the app has a navigator to direct the user to external websites with official and fan-created content related to the API.
 
 ## Essential Features
