@@ -56,7 +56,7 @@ db.movies.insertOne(movie002)
 var movie003 = {
   MovieID: "movie003",
   Title: "Starship Troopers",
-  Description: "Following clues to the origin of mankind, a team finds a structure on a distant moon, but they soon realize they are not alone.",
+  Description: "Humans in a fascist, militaristic future wage war with giant alien bugs.",
   GenreID: ["genre011", "genre009"],
   Genre: {
     GenreID: "genre011",

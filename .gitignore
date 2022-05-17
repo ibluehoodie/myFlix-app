@@ -1,6 +1,12 @@
-
 # Created by https://www.toptal.com/developers/gitignore/api/node
 # Edit at https://www.toptal.com/developers/gitignore?templates=node
+
+# Superfluous CF project files
+mongoDB.js
+log.txt
+backups
+mongoimport cmd
+
 
 ### Node ###
 # Logs
