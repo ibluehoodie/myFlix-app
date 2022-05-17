@@ -5,7 +5,7 @@
 mongoDB.js
 log.txt
 backups
-mongoimport cmd
+mongoimportcmd.txt
 
 ### Node ###
 # Logs
