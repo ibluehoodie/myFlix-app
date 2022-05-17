@@ -7,7 +7,6 @@ log.txt
 backups
 mongoimport cmd
 
-
 ### Node ###
 # Logs
 logs
