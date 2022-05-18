@@ -151,11 +151,12 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [
   });
 });
 
+// passport.authenticate('jwt', {session: false}),
 // POST request: add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.post('/users/:Username/movies/:_id', (req, res) => {
   let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOneAndUpdate({ Username: req.params.Username }, {
-    $push: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
+    $addToSet: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
   },
   { new: true }, // This line ensures that the updated document is returned.
   (err, updatedUser) => {
@@ -203,8 +204,10 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
   });
 });
 
+//re-enter as second parameter in app.get(/movies)
+// passport.authenticate('jwt', {session: false})
 // GET a list of ALL movies.
-app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.get('/movies', (req, res) => {
 Movies.find()
   .then((movies) => {
   res.status(200).json(movies);
@@ -294,13 +297,16 @@ app.delete('/users/:Username', passport.authenticate('jwt', {session: false}), (
 });
 
 
-// listen for requests
+// listen for requests on Heroku
 const port = process.env.PORT || 8080;
 app.listen(port, '0.0.0.0',() => {
   console.log('Listening on Port ' + port);
 });
+
+// Listen for requests on local
 // app.listen(8080, () => {
 //   console.log('Your app is running on port 8080.');
 // });
 
 // (maybe) in terminal "npm run dev".
+// git push heroku main
