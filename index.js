@@ -71,7 +71,7 @@ app.post('/users',
   //or use .isLength({min: 5}) which means
   //minimum value of 5 characters are only allowed.
   [
-    check('Username', 'Username is required').isLength({min: 6}),
+    check('Username', 'Username is required').isLength({min: 7}),
       check('Username', 'Username contains non-alphanumeric characters - not allowed.').isAlphanumeric(),
       check('Password', 'Password is required').not().isEmpty(),
       check('Email', 'Email does not appear to be valid').isEmail()
@@ -207,7 +207,7 @@ app.get('/users/:Username', passport.authenticate('jwt', {session: false}), (req
 //re-enter as second parameter in app.get(/movies)
 // passport.authenticate('jwt', {session: false})
 // GET a list of ALL movies.
-app.get('/movies', (req, res) => {
+app.get('/movies', passport.authenticate('jwt', {session: false}), (req, res) => {
 Movies.find()
   .then((movies) => {
   res.status(200).json(movies);
