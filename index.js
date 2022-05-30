@@ -155,8 +155,9 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [
 // POST request: add a movie to a user's list of favorites
 app.post('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
   // let hashedPassword = Users.hashPassword(req.body.Password);
-  Users.findOneAndUpdate({ Username: req.params.Username }, {
-    $addToSet: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
+  Users.findOneAndUpdate(
+    { Username: req.params.Username },
+    {$addToSet: {FavoriteMovies: req.params._id } // use $addToSet to add element that won't duplicate if already in the array.
   },
   { new: true }, // This line ensures that the updated document is returned.
   (err, updatedUser) => {
