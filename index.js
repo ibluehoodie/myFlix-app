@@ -153,7 +153,7 @@ app.put('/users/:Username', passport.authenticate('jwt', {session: false}), [
 
 // passport.authenticate('jwt', {session: false}),
 // POST request: add a movie to a user's list of favorites
-app.post('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
+app.put('/users/:Username/movies/:_id', passport.authenticate('jwt', {session: false}), (req, res) => {
   // let hashedPassword = Users.hashPassword(req.body.Password);
   Users.findOneAndUpdate(
     { Username: req.params.Username },
